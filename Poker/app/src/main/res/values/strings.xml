@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Poker</string>
+    <string name="inputBet">10</string>
+    <string name="myCoin">100</string>
+    <string name="textMsg_myCoin">所持コイン</string>
+    <string name="textMsg_errorMsg" />
+    <string name="textMsg_howManyBet">いくらBETしますか？</string>
+</resources>
