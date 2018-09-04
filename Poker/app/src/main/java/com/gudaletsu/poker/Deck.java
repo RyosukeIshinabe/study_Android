@@ -86,9 +86,14 @@ public class Deck {
         this.deck[index].changeShuffle();
     }
 
-    // 自身のデッキから指定された番号のカードを文字として表示する
-    public void displayCardFromDeck(int index) {
-        System.out.println(deck[index].toString());
+    // 自身のデッキから指定された番号のカードを文字としてreturnする
+    public String displayCardFromDeck(int index) {
+        return deck[index].toString();
+    }
+
+    // 自身のデッキから指定された番号のカードのSTAYorCHANGEをreturnする
+    public String displayStayOrChangeFromDeck(int index) {
+        return deck[index].toStringStayOrChange();
     }
 
     // 自身のデッキに格納された（null以外の）カードの枚数を取得

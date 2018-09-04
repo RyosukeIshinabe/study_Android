@@ -65,40 +65,40 @@ public class Card {
         String numberStr;
 
         // マーク用
-        switch ( mark ) {
+        switch ( this.mark ) {
             case SPADE:
-                markStr = "スペード";
+                markStr = "spade";
                 break;
             case HEART:
-                markStr = "ハート";
+                markStr = "heart";
                 break;
             case DIA:
-                markStr = "ダイヤ";
+                markStr = "diamond";
                 break;
             case CLUB:
-                markStr = "クラブ";
+                markStr = "club";
+                break;
+            default:
+                markStr = "any";
                 break;
         }
 
         // 数字用
-        switch ( number ) {
-            case 11:
-                numberStr = "J";
-                break;
-            case 12:
-                numberStr = "Q";
-                break;
-            case 13:
-                numberStr = "K";
-                break;
-            case 1:
-                numberStr = "A";
-                break;
-            default:
-                numberStr = String.valueOf(number);
-                break;
+        if ( this.number >= 1 && 9 >= this.number) {
+            numberStr = "0" + this.number;
+        } else {
+            numberStr = String.valueOf(this.number);
         }
-        return markStr + "の" + numberStr;
+
+        return "card_" + markStr + "_" + numberStr;
+    }
+
+    // シャッフル値を表現する文字列
+    public String toStringStayOrChange() {
+        if ( this.shuffle == true ) {
+            return "CHANGE";
+        }
+        return "STAY";
     }
 
     // カードの強さを比較する（引数のカードよりも自身のカードが強ければtrue）

@@ -5,4 +5,5 @@
     <string name="textMsg_myCoin">所持コイン</string>
     <string name="textMsg_errorMsg" />
     <string name="textMsg_howManyBet">いくらBETしますか？</string>
+    <string name="btn_endGame">back</string>
 </resources>

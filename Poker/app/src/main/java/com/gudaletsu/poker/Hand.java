@@ -104,53 +104,36 @@ public class Hand {
     public int checkAllHand(int[] sameMarkOfCardList, int[] sameNumOfCardList) {
 
         if ( checkStraightFlush(sameMarkOfCardList, sameNumOfCardList) ) {
-            System.out.println("ストレートフラッシュです！");
             return rankOfStraightFlush;
-
         } else if ( countSameNumCard(sameNumOfCardList) == 4 ) {
-            System.out.println("4カードです！");
             return rankOfFourCard;
-
         } else if ( checkFullhouse(sameNumOfCardList) ) {
-            System.out.println("フルハウスです！");
             return rankOfFullhouse;
-
         } else if ( checkFlush(sameMarkOfCardList) ) {
-            System.out.println("フラッシュです！");
             return rankOfFlush;
-
         } else if ( checkStraight(sameNumOfCardList) ) {
-            System.out.println("ストレートです！");
             return rankOfStraight;
-
         } else if ( countSameNumCard(sameNumOfCardList) == 3 ) {
-            System.out.println("3カードです！");
             return rankOfThreeCard;
-
         } else if ( countPairs(sameNumOfCardList) == 2 ) {
-            System.out.println("2ペアです！");
             return rankOfTwoPair;
-
         } else if ( countPairs(sameNumOfCardList) == 1 ) {
-            System.out.println("1ペアです！");
             return rankOfOnePair;
-
         } else {
             return 0;
         }
     }
 
     // 定型文表示
-    public void displayFirstMsg() {
-        System.out.println("【役一覧】");
-        System.out.println("1ペア：" + rankOfOnePair + "点");
-        System.out.println("2ペア：" + rankOfTwoPair + "点");
-        System.out.println("3カード：" + rankOfThreeCard + "点");
-        System.out.println("ストレート：" + rankOfStraight + "点");
-        System.out.println("フラッシュ：" + rankOfFlush + "点");
-        System.out.println("フルハウス：" + rankOfFullhouse + "点");
-        System.out.println("4カード：" + rankOfFourCard + "点");
-        System.out.println("ストレートフラッシュ：" + rankOfStraightFlush + "点");
-        System.out.println("=====================");
+    public String returnRuleString() {
+        String rule = "1ペア：" + rankOfOnePair + "点   "
+                    + "2ペア：" + rankOfTwoPair + "点\n"
+                    + "3カード：" + rankOfThreeCard + "点   "
+                    + "ストレート：" + rankOfStraight + "点\n"
+                    + "フラッシュ：" + rankOfFlush + "点   "
+                    + "フルハウス：" + rankOfFullhouse + "点\n"
+                    + "4カード：" + rankOfFourCard + "点   "
+                    + "ストレートフラッシュ：" + rankOfStraightFlush + "点";
+        return rule;
     }
 }

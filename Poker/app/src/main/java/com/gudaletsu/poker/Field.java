@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class Field {
 
-    private Deck unUsedDeck;	// 未使用のカードを格納するデッキ
-    private Deck usedDeck;  // 使用済みのカードを格納するデッキ
-    private Deck onFieldDeck;   // フィールド上に表示するためのデッキ
-    private final int ALLCARD = unUsedDeck.getALLCARD();    // トランプの最大枚数
+    private Deck unUsedDeck = new Deck();	// 未使用のカードを格納するデッキ
+    private Deck usedDeck = new Deck();  // 使用済みのカードを格納するデッキ
+    private Deck onFieldDeck = new Deck();   // フィールド上に表示するためのデッキ
+    private final int ALLCARD = 52;    // トランプの最大枚数
     private final int FIELDCARD = 5;    // フィールド上のカードの最大枚数
     private final int SHAFFLE = 2;    // シャッフルの最大回数
     private int round;	// 第*回戦
@@ -15,9 +15,9 @@ public class Field {
 
     // コンストラクタ
     public Field() {
-        unUsedDeck.createTrump();   // トランプのカードを全て作成
+        unUsedDeck.createTrump();   // トランプのカードを全て作成して未使用デッキとして保存
         onFieldDeck.makeDeck(FIELDCARD);    // フィールド用のデッキを作成
-        usedDeck.makeDeck(ALLCARD);
+        usedDeck.makeDeck(ALLCARD); // 使用済みデッキを作成
         round = 1;  // ラウンドを初期化
     }
 
@@ -91,6 +91,16 @@ public class Field {
         return onFieldDeck.getSameNumOfCardFromDeck();
     }
 
+    // 指定の番号のカードを表現する文字列を返す
+    public String getStringOfCardFromOnFieldDeck(int num) {
+        return onFieldDeck.displayCardFromDeck(num);
+    }
+
+    // 指定の番号のカードのSTAYorCHANGEを返す
+    public String getStringStayOrChangeFromOnFieldDeck(int num) {
+        return onFieldDeck.displayStayOrChangeFromDeck(num);
+    }
+
     /*
         デッキ間の移動
      */
@@ -102,7 +112,7 @@ public class Field {
         }
     }
 
-    // フィールドデッキ内のシャッフル=trueのカードを使用済みデッキへ移す
+    // フィールドデッキ内のシャッフル=trueのカードを使用済みデッキへ移し、元のデッキから消す
     public void moveShuffleCardFromFieldToUsedDeck() {
         for ( int i = 0; i < FIELDCARD; i++ ) {
             if ( onFieldDeck.getShuffleOfCardFromDeck(i) ) {
@@ -164,10 +174,17 @@ public class Field {
         this.round++;
     }
 
-    // 表示してインクリメント
-    public void displayRoundAndIncrement() {
-        System.out.println("### " + round + "/" + SHAFFLE + "回目のシャッフルです ###");
-        this.round++;
+    // 表示用のStringをreturn
+    public String returnRoundString() {
+        return "### " + round + "/" + SHAFFLE + "回目のシャッフルです ###";
     }
+
+    // 表示用のStringをreturnしてインクリメント
+    public String returnRoundStringAndIncrement() {
+        this.round++;
+        return "### " + round + "/" + SHAFFLE + "回目のシャッフルです ###";
+    }
+
+
 
 }

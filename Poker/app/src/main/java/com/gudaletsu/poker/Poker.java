@@ -17,7 +17,7 @@ public class Poker {
             myCoin.inputBet();  // コインをBET
 
             do {
-                myField.displayRoundAndIncrement(); // ラウンドを表示してインクリメント
+                myField.returnRoundStringAndIncrement(); // ラウンドを表示してインクリメント
 
                 // ここにフィールドカードとシャッフル値を取得するのをかく
 
