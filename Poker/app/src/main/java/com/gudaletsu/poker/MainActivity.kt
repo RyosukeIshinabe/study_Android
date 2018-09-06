@@ -12,14 +12,42 @@ class MainActivity : AppCompatActivity() {
     private var bet: Int = 10
     private var prefCoin: Int = 0
 
-    // アプリ起動時に呼ばれる処理
+    // アプリ起動時に最初の1回だけ呼ばれる処理
+    // アクティビティが戻ってきた時に再読み込みするものはonResumeに書くこと！
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         /*
-            共有プリファレンスの処理
+            STARTボタンが押された時の処理を定義
          */
+        btn_gameStart.setOnClickListener {
+            // ユーザーが入力したBETを受け取って変数に代入
+            var inputBetStr = txvw_inputBet.text.toString()
+            // intに変換（数字以外が入力されたらnullが入るようにする）
+            var inputBetInt: Int? = inputBetStr.toIntOrNull()
+
+            // nullじゃなければ
+            if ( inputBetInt != null ) {
+                // BETよりも所持コインが多ければ
+                if ( prefCoin >= inputBetInt ) {
+                    // BETをメンバ変数に保存しておいてゲームスタートメソッドへ
+                    bet = inputBetInt
+                    gameStart(it)
+                // BETよりも所持コインが少なければ
+                } else {
+                    txtvw_errorMsg.text = "そんな持ってねぇだろ"
+                }
+            // nullなら
+            } else {
+                txtvw_errorMsg.text = "変なの入力すんな"
+            }
+        }
+    }
+
+    @Override   // このアクティビティが再表示される度に読み込まれる処理
+    override fun onResume() {
+        super.onResume()    // これはおまじない（定型文）
 
         // SharedPreferencesのインスタンスを取得
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
@@ -29,37 +57,17 @@ class MainActivity : AppCompatActivity() {
             prefCoin = getInt("COIN", 100)
         }
 
-        /*
-            情報の表示
-         */
-
-        // コインを表示
-        txvw_myCoin.setText(prefCoin.toString())
-
-        /*
-            メソッド
-         */
-
-        // STARTボタンが押された時の処理
-        btn_gameStart.setOnClickListener {
-            if ( prefCoin >= bet ) {
-                gameStart(it)
-            } else {
-                txtvw_errorMsg.setText("コインが足りません。")
-            }
-        }
-
+        // 取得したコインをテキストビューに表示
+        txvw_myCoin.text = prefCoin.toString()
     }
 
-    // betを入力する処理（あとで書く）
-
-
-    // ゲームスタートメソッド（GameActivityを開く）
-    fun gameStart(view: View?) {
+    // ゲームスタートメソッド
+    private fun gameStart(view: View?) {
         // インテントを用意
         val intent = Intent(this, GameActivity::class.java)
-        // インテントにBETを保存
+        // インテントにBETを保存しておく
         intent.putExtra("BET", bet)
+        // GameActivityを開く
         startActivity(intent)
     }
 

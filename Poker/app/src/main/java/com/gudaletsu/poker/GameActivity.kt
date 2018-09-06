@@ -1,11 +1,10 @@
 package com.gudaletsu.poker
 
-import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game.*
-import org.jetbrains.anko.startActivity
 
 class GameActivity : AppCompatActivity() {
 
@@ -19,24 +18,22 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         /*
-            情報の表示
+            コインの準備
          */
 
-        // BETをインテントから取り出す
-        val bet = intent.getIntExtra("BET", 1)
-
-        // コインを共有プリファレンスから取り出す
+        // 共有プリファレンスのインスタンスを用意
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        // 取り出したコインをセット
+        // 共有プリファレンスからコインを取得して、メンバ変数にセット
         pref.apply { myCoin.quantity = getInt("COIN", 100) }
 
-        // betをセットして、その分手元のコインから引く
-        myCoin.changeFromCoinToBet(bet)
+        /*
+            BETの準備
+         */
 
-        // テキストビューに表示
-        txvw_myBet.setText(bet.toString())
-        txvw_myCoin.setText(myCoin.quantity.toString())
-        txvw_rule.setText(myHand.returnRuleString())
+        // 前画面で保存しておいたインテントからBETを取り出す
+        val bet = intent.getIntExtra("BET", 1)
+        // betをメンバ変数にセットして、その分手元のコインから引く
+        myCoin.changeFromCoinToBet(bet)
 
         /*
             メソッドの定義
@@ -55,23 +52,34 @@ class GameActivity : AppCompatActivity() {
         // endボタンが押された時のメソッドを定義
         btn_endGame.setOnClickListener { endGameTapped() }
 
-        /*
-            ゲームスタート
-         */
+        // 勝利後・敗北後のボタンを押した時のメソッドを定義
+        btn_continue.setOnClickListener { continueTapped() }
+        btn_refunds.setOnClickListener { refunds() }
+        btn_lose.setOnClickListener { lose() }
+
+        // ゲームスタート
+        gaming()
+    }
+
+    // ゲームスタート
+    private fun gaming() {
+
+        // コイン、BET、役一覧をテキストビューに表示
+        txvw_myBet.text = myCoin.bet.toString()
+        txvw_myCoin.text = myCoin.quantity.toString()
+        txvw_rule.text = myHand.returnRuleString()
 
         // 未使用カードを最大5枚引いてフィールドデッキへ移動
         myField.moveCardFromUnUsedToField()
 
-        // ラウンドを表示
+        // ラウンド数を表示
         txvw_msg.text = myField.returnRoundString()
 
-        // カードを表示
+        // カードの画像を表示
         displayCardImage()
 
-        // STAYorCHANGEを表示
+        // STAYorCHANGEのテキストを表示
         displayStayOrChange()
-
-
 
     }
 
@@ -85,24 +93,22 @@ class GameActivity : AppCompatActivity() {
 
         // コインをセーブして
         saveData()
-
         // メインアクティビティに移動
-        startActivity<MainActivity>()
+        finish()
     }
 
-    @SuppressLint("CommitPrefEdits")
     // コインをセーブするメソッド
-    fun saveData() {
+    private fun saveData() {
+        // 共有プリファレンスに所持コインを追加（まとめて書いてみた）
         PreferenceManager.getDefaultSharedPreferences(this)
-        .edit()
-        .putInt("COIN", myCoin.quantity)
-        .apply()
+            .edit() // 編集するおまじない
+            .putInt("COIN", myCoin.quantity)    // データを書き込み
+            .apply()    // 実行するおまじない
     }
 
     // このアクティビティが非表示になった時に呼ばれるメソッド
     override fun onPause() {
         super.onPause()
-        // コインを共有プリファレンスに保存
         PreferenceManager.getDefaultSharedPreferences(this)
                 .edit()
                 .putInt("COIN", myCoin.quantity)
@@ -112,24 +118,24 @@ class GameActivity : AppCompatActivity() {
     // カードを表示するメソッド
     private fun displayCardImage() {
 
-        // 1枚目カードを表現するStringを取得
-        val image1 = myField.getStringOfCardFromOnFieldDeck(1)
+        // 1枚目のカードを表現するStringを取得（例：card_spade_01）
+        val image1 = myField.getStringOfCardFromOnFieldDeck(0)
         // 取得したStringから、drawableフォルダ内のリソースID（int型）を特定して格納
         val rsid1 = resources.getIdentifier(image1, "drawable", packageName)
         // リソースIDを使用してイメージビューの画像を変更
         imvw_card1.setImageResource(rsid1)
 
         // 以下、2〜5枚目のカードも同じことを行う
-        val image2 = myField.getStringOfCardFromOnFieldDeck(2)
+        val image2 = myField.getStringOfCardFromOnFieldDeck(1)
         val rsid2 = resources.getIdentifier(image2, "drawable", packageName)
         imvw_card2.setImageResource(rsid2)
-        val image3 = myField.getStringOfCardFromOnFieldDeck(3)
+        val image3 = myField.getStringOfCardFromOnFieldDeck(2)
         val rsid3 = resources.getIdentifier(image3, "drawable", packageName)
         imvw_card3.setImageResource(rsid3)
-        val image4 = myField.getStringOfCardFromOnFieldDeck(4)
+        val image4 = myField.getStringOfCardFromOnFieldDeck(3)
         val rsid4 = resources.getIdentifier(image4, "drawable", packageName)
         imvw_card4.setImageResource(rsid4)
-        val image5 = myField.getStringOfCardFromOnFieldDeck(5)
+        val image5 = myField.getStringOfCardFromOnFieldDeck(4)
         val rsid5 = resources.getIdentifier(image5, "drawable", packageName)
         imvw_card5.setImageResource(rsid5)
 
@@ -137,52 +143,104 @@ class GameActivity : AppCompatActivity() {
 
     // STAYorCHANGEを表示するメソッド
     private fun displayStayOrChange() {
-        txvw_sorc1.setText(myField.getStringStayOrChangeFromOnFieldDeck(1))
-        txvw_sorc1.setText(myField.getStringStayOrChangeFromOnFieldDeck(2))
-        txvw_sorc1.setText(myField.getStringStayOrChangeFromOnFieldDeck(3))
-        txvw_sorc1.setText(myField.getStringStayOrChangeFromOnFieldDeck(4))
-        txvw_sorc1.setText(myField.getStringStayOrChangeFromOnFieldDeck(5))
+        txvw_sorc1.text = myField.getStringStayOrChangeFromOnFieldDeck(0)
+        txvw_sorc2.text = myField.getStringStayOrChangeFromOnFieldDeck(1)
+        txvw_sorc3.text = myField.getStringStayOrChangeFromOnFieldDeck(2)
+        txvw_sorc4.text = myField.getStringStayOrChangeFromOnFieldDeck(3)
+        txvw_sorc5.text = myField.getStringStayOrChangeFromOnFieldDeck(4)
     }
 
-    // カードをタップした時のメソッド
-    fun tapCard(num: Int) {
-        myField.changeShuffleOfFieldDeck(num)   // シャッフル値を変更
-        displayStayOrChange()   //  STAYorCHANGEを更新
+    // カードをタップした時のメソッド（引数でどのカードをタップしたか受け取る）
+    private fun tapCard(num: Int) {
+        // タップしたカードのシャッフル値を変更
+        myField.changeShuffleOfFieldDeck(num)
+        // STAYorCHANGEのテキストビューを更新
+        displayStayOrChange()
     }
 
     // カードをシャッフルした時のメソッド
-    fun shuffleCard() {
+    private fun shuffleCard() {
         // シャッフル値=trueのカードを使用済みに移し、元のデッキから消す
         myField.moveShuffleCardFromFieldToUsedDeck()
         // 足りない分のカードを未使用デッキから補充する
         myField.moveCardFromUnUsedToField()
         // カードを表示する
         displayCardImage()
-        // STAYorCHANGEを更新
+        // STAYorCHANGEのテキストビューを更新
         displayStayOrChange()
-        // ラウンド数をインクリメント
-        myField.incrementRound()
 
         // もしroundが2よりも大きかった場合
-        if ( myField.getRound() > 2 ) {
+        if ( myField.round >= 2 ) {
             // 評価メソッドへ移動
             judge()
+        // それ以外の場合
+        } else {
+            // ラウンド数をインクリメント
+            myField.incrementRound()
+            // ラウンド表示のテキストビューを更新
+            txvw_msg.text = myField.returnRoundString()
         }
-
-        // ラウンドを更新
-        txvw_msg.text = myField.returnRoundString()
     }
 
     // 評価メソッド
-    fun judge() {
+    private fun judge() {
+        // 役のランクを取得
         rank = myHand.checkAllHand(myField.sameMarkOfCardFromOnFieldDeck, myField.sameNumOfCardFromOnFieldDeck)
-        myCoin.multiplicate(rank)  // BETを倍がけ（役がない場合=つまり負けた場合はここでBETが0になる）
 
-        // ランクを表示
-        txvw_msg.text = rank.toString() + "ポイントでした"
+        // ランクをテキストビューに表示
+        txvw_msg.text = rank.toString() + "ポイントでした\nBETを" + rank.toString() + "倍にしといたよ"
+        // BET×RANKを実行（役がない場合=つまり負けた場合はここでBETが0になる）
+        myCoin.multiplicate(rank)
+        // BETのテキストビューを更新
+        txvw_myBet.text = myCoin.bet.toString()
 
         // 全てのカードを使用済みへ移動
         myField.moveCardFromFieldToUsedDeck()
+
+        // 勝ちだった場合
+        if ( myCoin.bet > 0 ) {
+            // 選択肢ボタンを表示する
+            btn_continue.visibility = View.VISIBLE
+            btn_refunds.visibility = View.VISIBLE
+
+        // 負けだった場合
+        } else {
+            // 選択肢ボタンを表示する
+            btn_lose.visibility = View.VISIBLE
+        }
+    }
+
+    // 勝利した後に続けるメソッド
+    private fun continueTapped() {
+        // 選択肢ボタンを非表示にする
+        btn_continue.visibility = View.INVISIBLE
+        btn_refunds.visibility = View.INVISIBLE
+
+        // ランク、デッキ、ラウンド数をリセット
+        rank = 0
+        myField.init()
+        // ゲームスタート
+        gaming()
+    }
+
+    // 勝利した後に利益確定するメソッド
+    private fun refunds() {
+        // 選択肢ボタンを非表示にする
+        btn_continue.visibility = View.INVISIBLE
+        btn_refunds.visibility = View.INVISIBLE
+
+        // BETをコインに換金
+        myCoin.changeFromBetToCoin()
+        // 終了処理
+        endGameTapped()
+    }
+
+    // 負けた時のメソッド
+    private fun lose() {
+        // 選択肢ボタンを非表示にする
+        btn_lose.visibility = View.INVISIBLE
+        // 終了処理
+        endGameTapped()
     }
 
 }

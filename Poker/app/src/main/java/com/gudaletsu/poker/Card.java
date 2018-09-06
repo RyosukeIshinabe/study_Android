@@ -3,7 +3,7 @@ package com.gudaletsu.poker;
 public class Card {
 
     private int mark;   // マーク（0〜3）
-    private int number; // 数字（1〜13）
+    private int number; // 数字（0〜12）
     private boolean shuffle; // シャッフルするかどうか
     private static final int SPADE = 3;	// スペード
     private static final int HEART = 2;	// ハート
@@ -61,33 +61,28 @@ public class Card {
 
     // カードを表現する文字列
     public String toString() {
-        String markStr = "";
+        String markStr;
         String numberStr;
 
         // マーク用
-        switch ( this.mark ) {
-            case SPADE:
-                markStr = "spade";
-                break;
-            case HEART:
-                markStr = "heart";
-                break;
-            case DIA:
-                markStr = "diamond";
-                break;
-            case CLUB:
-                markStr = "club";
-                break;
-            default:
-                markStr = "any";
-                break;
+        int mark = this.mark;
+        if (mark == SPADE) {
+            markStr = "spade";
+        } else if (mark == HEART) {
+            markStr = "heart";
+        } else if (mark == DIA) {
+            markStr = "diamond";
+        } else if (mark == CLUB) {
+            markStr = "club";
+        } else {
+            markStr = "any";
         }
 
         // 数字用
-        if ( this.number >= 1 && 9 >= this.number) {
-            numberStr = "0" + this.number;
+        if ( this.number >= 0 && 8 >= this.number) {
+            numberStr = "0" + (this.number + 1);
         } else {
-            numberStr = String.valueOf(this.number);
+            numberStr = String.valueOf(this.number + 1);
         }
 
         return "card_" + markStr + "_" + numberStr;

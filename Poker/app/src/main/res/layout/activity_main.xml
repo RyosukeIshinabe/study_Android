@@ -30,9 +30,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="100"
+        android:hint="10"
         android:inputType="number"
-        android:text="@string/inputBet"
         app:layout_constraintBottom_toTopOf="@+id/btn_gameStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +85,18 @@
 
     <TextView
         android:id="@+id/txtvw_errorMsg"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:text="@string/textMsg_errorMsg"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="443dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_gameStart" />
 
 </android.support.constraint.ConstraintLayout>

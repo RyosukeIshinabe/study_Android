@@ -29,22 +29,22 @@ public class Coin {
         フィールドのゲッターとセッター
      */
 
-    // コインの枚数を返す
+    // コインのゲッター
     public int getQuantity() {
         return this.quantity;
     }
 
-    // BETを返す
+    // BETのゲッター
     public int getBet() {
         return this.bet;
     }
 
-    // コインをセットする
+    // コインのセッター
     public void setQuantity(int newQuantity) {
         this.quantity = newQuantity;
     }
 
-    // BETをセットする
+    // BETのセッター
     public void setBet(int newBet) {
         this.bet = newBet;
     }

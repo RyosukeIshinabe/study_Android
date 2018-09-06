@@ -18,7 +18,7 @@ public class Deck {
         deck = new Card[ALLCARD];
         int index = 0;	// 配列のkey用
         for ( int i = 0; i < MAXMARK; i++ ) {
-            for ( int j = 1; j <= MAXNUM; j++ ) {
+            for ( int j = 0; j < MAXNUM; j++ ) {
                 deck[index] = new Card(i,j,false);
                 index++;
             }
@@ -66,17 +66,7 @@ public class Deck {
         return refuge;	// 避難していたカードをreturn
     }
 
-    // 自身のデッキから指定された番号のカードのマークのみを取得する
-    public int getMarkOfCardFromDeck(int index) {
-        return this.deck[index].getMark();
-    }
-
-    // 自身のデッキから指定された番号のカードのナンバーのみを取得する
-    public int getNumberOfCardFromDeck(int index) {
-        return this.deck[index].getNumber();
-    }
-
-    // 自身のデッキから指定された番号のカードのシャッフル値のみを取得する
+    // 自身のデッキから指定された番号のカードのシャッフル値を取得する
     public boolean getShuffleOfCardFromDeck(int index) {
         return this.deck[index].getShuffle();
     }
@@ -149,20 +139,9 @@ public class Deck {
 
     // 自身のデッキ内の1枚目をreturnして消去
     public Card getFirstCardFromDeckAndErase() {
-        Card refuge = deck[0];	// 引いたカードを一旦避難
-        deck[0] = null;	// 引いたカードの場所をnullにする
+        Card refuge = deck[0];    // 引いたカードを一旦避難
+        deck[0] = null;    // 引いたカードの場所をnullにする
         return refuge;
-    }
-
-    // 自身のデッキと、引数で指定されたデッキの枚数を比較する（自分の方が多い2、少ない1、同じ0）
-    public int compareCardLength(Deck otherDeck) {
-        if ( getDeckLength() > otherDeck.getDeckLength() ) {
-            return 2;
-        } else if ( getDeckLength() < otherDeck.getDeckLength() ) {
-            return 1;
-        } else {
-            return 0;
-        }
     }
 
     // デッキ内のカードを全て破棄
@@ -193,17 +172,17 @@ public class Deck {
     public int[] getSameNumOfCardFromDeck() {
 
         // 数字の種類分の配列を用意
-        int[] sameNumkDeck = new int[MAXNUM];
+        int[] sameNumDeck = new int[MAXNUM];
         for ( int i = 0; i < MAXNUM; i++ ) {
-            sameNumkDeck[i] = 0;
+            sameNumDeck[i] = 0;
         }
 
         // デッキ内の全てのカードを調べて同じマークがあった場合インクリメント
         for ( int j = 0; j < this.getDeckLength(); j++ ) {
-            int num = this.deck[j].getMark();
-            sameNumkDeck[num]++;
+            int num = this.deck[j].getNumber();
+            sameNumDeck[num]++;
         }
-        return sameNumkDeck;
+        return sameNumDeck;
     }
 
 

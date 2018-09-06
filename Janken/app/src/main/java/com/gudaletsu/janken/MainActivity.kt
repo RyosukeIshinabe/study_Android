@@ -34,17 +34,17 @@ class MainActivity : AppCompatActivity() {
             Ankoを使わずに書いた場合
          */
 
-//        // intentクラスを作成
-//        // 第一引数で読み出し元のインスタンスを指定（この場合はこの画面、つまりMainActivityなのでthis）
-//        // 第二引数で呼び出したいアクティビティを指定。Javaでは「クラス名.class」だが、Kotlinでは「クラス名::class.java」でClassのインスタンスを取得
-//        val intent = Intent(this, ResultActivity::class.java)
-//
-//        // intentに、次のアクティビティに引き渡すデータを設定する
-//        // putExtra（キー, 引き渡す値）。ここではMY_HANDをキーにして（別にどんな名前でも良い）、onJankenButtonTappedの引数で渡されたビューのIDを保存している（null許容型なので[?]）
-//        intent.putExtra("MY_HAND", view?.id )
-//
-//        // startActivity(インテント)で先ほどセットしたアクティビティを呼び出す
-//        startActivity(intent)
+        // intentクラスを作成
+        // 第一引数で読み出し元のインスタンスを指定（この場合はこの画面、つまりMainActivityなのでthis）
+        // 第二引数で呼び出したいアクティビティを指定。Javaでは「クラス名.class」だが、Kotlinでは「クラス名::class.java」でClassのインスタンスを取得
+        val intent = Intent(this, ResultActivity::class.java)
+
+        // intentに、次のアクティビティに引き渡すデータを設定する
+        // putExtra（キー, 引き渡す値）。ここではMY_HANDをキーにして（別にどんな名前でも良い）、onJankenButtonTappedの引数で渡されたビューのIDを保存している（null許容型なので[?]）
+        intent.putExtra("MY_HAND", view?.id )
+
+        // startActivity(インテント)で先ほどセットしたアクティビティを呼び出す
+        startActivity(intent)
 
         /*
             Ankoを使って書いた場合

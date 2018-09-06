@@ -70,7 +70,6 @@
         android:gravity="left"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/txvw_myCoin"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txvw_myCoin"
         app:layout_constraintTop_toBottomOf="@+id/txvw_myCoin" />
 
@@ -102,7 +101,7 @@
         android:id="@+id/imvw_card3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="90dp"
         android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
         android:scaleType="fitCenter"
@@ -114,7 +113,7 @@
         android:id="@+id/imvw_card4"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="90dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -129,7 +128,7 @@
         android:id="@+id/imvw_card5"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="90dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:scaleType="fitCenter"
@@ -207,48 +206,112 @@
         app:layout_constraintStart_toStartOf="@+id/imvw_card5"
         app:layout_constraintTop_toBottomOf="@+id/imvw_card5" />
 
-    <EditText
-        android:id="@+id/txvw_rule"
-        android:layout_width="280dp"
-        android:layout_height="87dp"
+    <TextView
+        android:id="@+id/txvw_msg"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:singleLine="false"
-        android:text="役一覧"
-        app:layout_constraintBottom_toTopOf="@+id/txvw_msg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/txvw_msg"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:gravity="center_horizontal"
+        android:maxLines="2"
+        android:minLines="1"
         android:text="ゲームスタート！"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintBottom_toTopOf="@+id/imvw_card1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvw_rule" />
 
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:text="確定"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="147dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txvw_rule"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:maxLines="4"
+        android:minLines="4"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="さらに増やすぜ！"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_refunds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_refunds"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="利益確定！"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="↑backしてもbetは戻って来ないよ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_endGame" />
+
+    <Button
+        android:id="@+id/btn_lose"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="おわった・・・"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

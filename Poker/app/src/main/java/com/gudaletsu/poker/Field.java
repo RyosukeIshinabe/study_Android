@@ -107,7 +107,7 @@ public class Field {
 
     // フィールドデッキに足りない枚数のカードを未使用デッキから引く
     public void moveCardFromUnUsedToField() {
-        while ( onFieldDeck.getDeckLength() == FIELDCARD ) {
+        while ( onFieldDeck.getDeckLength() < FIELDCARD ) {
             onFieldDeck.insertCard(unUsedDeck.takeCardFromDeckAndErase());
         }
     }
