@@ -126,14 +126,14 @@ public class Hand {
 
     // 定型文表示
     public String returnRuleString() {
-        String rule = "1ペア：" + rankOfOnePair + "点   "
-                    + "2ペア：" + rankOfTwoPair + "点\n"
-                    + "3カード：" + rankOfThreeCard + "点   "
-                    + "ストレート：" + rankOfStraight + "点\n"
-                    + "フラッシュ：" + rankOfFlush + "点   "
-                    + "フルハウス：" + rankOfFullhouse + "点\n"
-                    + "4カード：" + rankOfFourCard + "点   "
-                    + "ストレートフラッシュ：" + rankOfStraightFlush + "点";
+        String rule = "1ペア：" + rankOfOnePair + "倍     "
+                    + "2ペア：" + rankOfTwoPair + "倍\n"
+                    + "3カード：" + rankOfThreeCard + "倍     "
+                    + "ストレート：" + rankOfStraight + "倍\n"
+                    + "フラッシュ：" + rankOfFlush + "倍     "
+                    + "フルハウス：" + rankOfFullhouse + "倍\n"
+                    + "4カード：" + rankOfFourCard + "倍     "
+                    + "ストレートフラッシュ：" + rankOfStraightFlush + "倍";
         return rule;
     }
 }

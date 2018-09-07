@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
             // intに変換（数字以外が入力されたらnullが入るようにする）
             var inputBetInt: Int? = inputBetStr.toIntOrNull()
 
-            // nullじゃなければ
-            if ( inputBetInt != null ) {
+            // nullじゃなく、かつ1よりも多ければ
+            if ( inputBetInt != null && inputBetInt >= 1) {
                 // BETよりも所持コインが多ければ
                 if ( prefCoin >= inputBetInt ) {
                     // BETをメンバ変数に保存しておいてゲームスタートメソッドへ

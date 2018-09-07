@@ -188,7 +188,7 @@ class GameActivity : AppCompatActivity() {
         rank = myHand.checkAllHand(myField.sameMarkOfCardFromOnFieldDeck, myField.sameNumOfCardFromOnFieldDeck)
 
         // ランクをテキストビューに表示
-        txvw_msg.text = rank.toString() + "ポイントでした\nBETを" + rank.toString() + "倍にしといたよ"
+        txvw_msg.text = rank.toString() + "倍でした！\nBETを" + rank.toString() + "倍にしといたよ"
         // BET×RANKを実行（役がない場合=つまり負けた場合はここでBETが0になる）
         myCoin.multiplicate(rank)
         // BETのテキストビューを更新
