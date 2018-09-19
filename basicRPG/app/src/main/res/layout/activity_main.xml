@@ -2,42 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/btn_moveLeft"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_moveDown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:color/holo_red_dark" />
-
-    <ImageView
-        android:id="@+id/btn_moveRight"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_moveDown"
-        app:layout_constraintStart_toEndOf="@+id/btn_moveLeft"
-        app:srcCompat="@android:color/holo_red_dark" />
-
-    <ImageView
-        android:id="@+id/btn_moveDown"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/mapA2"
@@ -277,8 +245,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:color/holo_red_dark" />
 
+    <ImageView
+        android:id="@+id/btn_moveDown"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:color/holo_red_dark" />
+
+    <ImageView
+        android:id="@+id/btn_moveLeft"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_moveDown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:color/holo_red_dark" />
+
+    <ImageView
+        android:id="@+id/btn_moveRight"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_moveDown"
+        app:layout_constraintStart_toEndOf="@+id/btn_moveLeft"
+        app:srcCompat="@android:color/holo_red_dark" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/fixedText_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -300,7 +301,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/fixedText_exp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="180dp"
@@ -310,7 +311,7 @@
         tools:layout_editor_absoluteY="477dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/fixedText_enemyLv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="76dp"
@@ -332,13 +333,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/fixedText_lv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="180dp"
         android:layout_marginRight="180dp"
         android:text="HP:"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/fixedText_mp"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -352,13 +353,13 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/fixedText_mp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="180dp"
         android:layout_marginRight="180dp"
         android:text="MP:"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/fixedText_exp"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -372,23 +373,23 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/fixedText_atk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="72dp"
         android:layout_marginRight="72dp"
         android:text="ATK:"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintBottom_toTopOf="@+id/fixedText_def"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/fixedText_def"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="72dp"
         android:layout_marginRight="72dp"
         android:text="DEF:"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintBottom_toTopOf="@+id/fixedText_gold"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView

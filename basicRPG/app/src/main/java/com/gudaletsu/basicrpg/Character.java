@@ -12,8 +12,8 @@ abstract public class Character {
     protected int mp;
     protected int exp;
 
+    // コンストラクタ
     public Character() {
-
     }
 
     /*
@@ -89,10 +89,23 @@ abstract public class Character {
     public void lvUp() {
         this.lv++;
     }
+
+    // レベルダウン
+    public void lvDown() {
+        this.lv--;
+    }
+
     // ゴールドを変更する
     public void changeGold(int amount) {
         this.gold += amount;
+        // 最大値を超えないようにする
+        if ( this.gold >= 9999 ) {
+            this.gold = 9999;
+        } else if ( this.gold <= 0 ) {
+            this.gold = 0;
+        }
     }
+
     // HPを変更する
     public void changeHp(int amount) {
         this.hp += amount;
@@ -103,6 +116,7 @@ abstract public class Character {
             this.hp = 0;
         }
     }
+
     // MPを変更する
     public void changeMp(int amount) {
         this.mp += amount;
@@ -113,27 +127,22 @@ abstract public class Character {
             this.mp = 0;
         }
     }
+
+    // 攻撃力を変更する
+    public void changeAtk(int amount) {
+        this.atk *= amount;
+    }
+
+    // 防御力を変更する
+    public void changeDef(int amount) {
+        this.def *= amount;
+    }
+
     // Expを変更する
     public void changeExp(int amount) {
         this.exp += amount;
     }
 
-    // 経験値を元にレベルを変更
-    public void checkLv() {
-        if ( this.exp < 10 ) {
-            setLv(1);
-        } else if ( this.exp < 30 ) {
-            setLv(2);
-        } else if ( this.exp < 70 ) {
-            setLv(3);
-        } else if ( this.exp < 150 ) {
-            setLv(4);
-        } else if ( this.exp < 310 ) {
-            setLv(5);
-        } else {
-            setLv(6);
-        }
-    }
-
+    // ステータスをチェックする（抽象メソッド）
     abstract public void checkStatus();
 }

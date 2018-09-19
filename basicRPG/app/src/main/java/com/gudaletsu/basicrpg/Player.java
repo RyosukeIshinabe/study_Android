@@ -1,6 +1,8 @@
 package com.gudaletsu.basicrpg;
 
-public class Player extends Character {
+import java.io.Serializable;
+
+public class Player extends Character implements Serializable {
 
     // コンストラクタ
     public Player() {
@@ -15,6 +17,23 @@ public class Player extends Character {
         this.gold = 100;
         this.exp = 0;
         checkStatus();
+    }
+
+    // 経験値を元にレベルを変更
+    public void checkLv() {
+        if ( this.exp < 10 ) {
+            setLv(1);
+        } else if ( this.exp < 30 ) {
+            setLv(2);
+        } else if ( this.exp < 70 ) {
+            setLv(3);
+        } else if ( this.exp < 150 ) {
+            setLv(4);
+        } else if ( this.exp < 310 ) {
+            setLv(5);
+        } else {
+            setLv(6);
+        }
     }
 
     // レベルを元にステータスを変更
@@ -56,14 +75,6 @@ public class Player extends Character {
                 this.maxHp = this.hp = 184;
                 this.maxMp = this.mp = 47;
         }
-    }
-
-    // バトル後の一連の処理
-    public void afterBattle(int getExp, int getGold) {
-        changeExp(getExp);  // 入手したExpを加算
-        checkLv();  // 経験値累計を元にレベルを変更
-        checkStatus();  // レベルを元にステータスを変更
-        changeGold(getGold);    // ゴールドを加算
     }
 
     // 死亡した時の処理
