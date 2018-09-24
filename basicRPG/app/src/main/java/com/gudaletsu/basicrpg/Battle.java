@@ -1,5 +1,7 @@
 package com.gudaletsu.basicrpg;
 
+import android.util.Log;
+
 public class Battle {
     private final int MAXENEMY = 4;
     private Player player;
@@ -28,15 +30,23 @@ public class Battle {
     // 攻撃（あとでロジック調整する）ダメージ量をreturn
     public int attack(boolean ofPlayerTurn, double amount) {
         if ( ofPlayerTurn ) {   // プレイヤーの攻撃
-            int damege = this.player.getAtk() * 2 - this.enemy.getDef();
-            damege *= amount;
-            this.enemy.changeHp(damege * -1);
-            return damege;
+            int damage = this.player.getAtk() * 2 - this.enemy.getDef();
+            if ( damage <= 0 ) { return 0; }
+            damage *= amount;
+                Log.d("event", "[debug] damage is : " + damage);
+                Log.d("event", "[debug] current enemy HP is : " + this.enemy.getHp());
+            this.enemy.changeHp(damage * -1);
+                Log.d("event", "[debug] changed enemy HP to : " + this.enemy.getHp());
+            return damage;
         } else {    // 敵の攻撃
-            int damege = this.enemy.getAtk() * 2 - this.player.getDef();
-            damege *= amount;
-            this.player.changeHp(damege * -1);
-            return damege;
+            int damage = this.enemy.getAtk() * 2 - this.player.getDef();
+            if ( damage <= 0 ) { return 0; }
+            damage *= amount;
+                Log.d("event", "[debug] damage is : " + damage);
+                Log.d("event", "[debug] current player HP is : " + this.player.getHp());
+            this.player.changeHp(damage * -1);
+                Log.d("event", "[debug] changed player HP to : " + this.player.getHp());
+            return damage;
         }
     }
 
@@ -52,5 +62,8 @@ public class Battle {
             return recovery;
         }
     }
+
+
+
 
 }

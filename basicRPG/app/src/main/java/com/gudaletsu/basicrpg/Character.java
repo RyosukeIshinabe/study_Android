@@ -1,5 +1,7 @@
 package com.gudaletsu.basicrpg;
 
+import android.util.Log;
+
 abstract public class Character {
     protected String name;
     protected int lv;
@@ -88,11 +90,17 @@ abstract public class Character {
     // レベルアップ
     public void lvUp() {
         this.lv++;
+        if ( this.lv > 99 ) {
+            this.lv = 99;
+        }
     }
 
     // レベルダウン
     public void lvDown() {
         this.lv--;
+        if ( this.lv < 1 ) {
+            this.lv = 1;
+        }
     }
 
     // ゴールドを変更する
@@ -145,4 +153,10 @@ abstract public class Character {
 
     // ステータスをチェックする（抽象メソッド）
     abstract public void checkStatus();
+
+    // 休憩（HP,MPを全回復）
+    public void rest() {
+        this.hp = this.maxHp;
+        this.mp = this.maxMp;
+    }
 }
