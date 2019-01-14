@@ -7,7 +7,8 @@ import 'textField.dart';
 import 'dropdownButton.dart';
 import 'popupMenuButton.dart';
 import 'appBar.dart';
+import 'bottomNavigationBar.dart';
 
 // runApp()で動かしたいクラスを指定してください。
 
-void main() => runApp(new AppBarTest());
+void main() => runApp(new BottomNavigationBarTest());
