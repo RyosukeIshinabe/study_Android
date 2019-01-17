@@ -10,7 +10,9 @@ import 'appBar.dart';
 import 'bottomNavigationBar.dart';
 import 'listView.dart';
 import 'singleChildScrollView.dart';
+import 'tabBar.dart';
+import 'drawer.dart';
 
 // runApp()で動かしたいクラスを指定してください。
 
-void main() => runApp(new SingleChildScrollViewTest());
+void main() => runApp(new DrawerTest());
