@@ -15,4 +15,4 @@ import 'drawer.dart';
 
 // runApp()で動かしたいクラスを指定してください。
 
-void main() => runApp(new DrawerTest());
+void main() => runApp(new BottomNavigationBarTest());

@@ -1,4 +1,4 @@
-name: flutter_render_test
+name: flutter_system_test
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -30,8 +30,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  assets:
-    - assets/sample_image.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
