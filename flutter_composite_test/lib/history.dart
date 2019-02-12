@@ -3,7 +3,7 @@ import 'style.dart';
 
 class History {
 
-  static Center historyContents = new Center(
+  static Widget contents = new Center(
     child: Text("履歴", style: AppStyle.defaultTextStyle,)
   );
 

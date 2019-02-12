@@ -4,7 +4,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class Home {
 
-  static Center homeContents = new Center(
+  static Widget contents = new Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
@@ -57,6 +57,14 @@ class Home {
           alignment: Alignment.center,
           child: Text("ヒャッハーーー", style: AppStyle.defaultTextStyle,),
         ),
+
+        Container(
+          color: const Color(0xFFfafafa),
+          margin: const EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          child: Text("角丸にするのどうやんのぉおお", style: AppStyle.defaultTextStyle,),
+        ),
+
       ]
     ),
   );

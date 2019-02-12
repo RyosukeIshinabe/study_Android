@@ -13,6 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.orange,
+        primaryColor: Colors.orange,
+        accentColor: Colors.orange,
+      ),
       home: MyHomePage(),
     );
   }
@@ -37,15 +42,20 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     // メニュー番号に応じて表示するコンテンツを取得
-    Center mainContents = new Center();
-    if ( _menuIndex == 1 ) {
-      mainContents = Favorite.favoriteContents;
-    } else if ( _menuIndex == 2 ) {
-      mainContents = History.historyContents;
-    } else if ( _menuIndex == 3 ) {
-      mainContents = Settings.settingsContents;
-    } else {
-      mainContents = Home.homeContents;
+    Widget displayContents;
+    switch ( _menuIndex ) {
+      case 1 :
+        displayContents = Favorite.contents;
+        break;
+      case 2 :
+        displayContents = History.contents;
+        break;
+      case 3 :
+        displayContents = Settings.contents;
+        break;
+      default :
+        displayContents = Home.contents;
+        break;
     }
 
     return Scaffold(
@@ -55,35 +65,37 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       // 予めメニュー番号に応じて用意しておいたコンテンツを表示
-      body: mainContents,
+      body: displayContents,
 
       // 下部メニュー
       bottomNavigationBar: new BottomNavigationBar(
         // 現在選択されている項目のインデックス。これに設定されたインデックス（int）のアイコンが選択状態で表示される
         currentIndex: _menuIndex,
-        // itemsに全てのメニューアイコンが格納される
+
+        // itemsに全てのメニューアイコンを格納する
         items: <BottomNavigationBarItem>[
           // BottomNavigationBarItemウィジェットでアイコンとタイトルを指定する
-          // タップした時のメソッドはアイコンごとに個別に指定はできず、bottomNavigationBar内のonTapプロパティで一括で指定するしかない
+          // タップした時のメソッドはアイコンごとに個別に指定はできず、
+          // bottomNavigationBar内のonTapプロパティで一括で指定するしかないらしい
           BottomNavigationBarItem(
-            icon: const Icon(Icons.home),
+            icon: const Icon(Icons.home, color: Colors.orange,),
             title: Text('Home', style: AppStyle.smallTextStyle,),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite, color: Colors.orange,),
             title: Text('Favorite', style: AppStyle.smallTextStyle,),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.history),
+            icon: const Icon(Icons.history, color: Colors.orange,),
             title: Text('History', style: AppStyle.smallTextStyle,),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings, color: Colors.orange,),
             title: Text('Settings', style: AppStyle.smallTextStyle,),
           ),
         ],
 
-        // タップされた時に呼ばれるメソッドを指定する。全てのアイコンで呼ばれるため、動作を変えたい場合はメンバ変数を使うこと
+        // タップされた時に呼ばれるメソッドを指定する（全てのアイコンで呼ばれる）
         // 引数には（ここには何も書かれていないが）、タップされたアイコンのインデックス番号（0〜）が自動で渡される
         onTap: tapBottomIcon,
       ),

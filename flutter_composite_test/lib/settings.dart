@@ -3,7 +3,7 @@ import 'style.dart';
 
 class Settings {
 
-  static Center settingsContents = new Center(
+  static Widget contents = new Center(
     child: Text("設定", style: AppStyle.defaultTextStyle,)
   );
 
