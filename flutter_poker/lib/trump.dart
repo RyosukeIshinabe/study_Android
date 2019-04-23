@@ -29,13 +29,13 @@ class Trump {
     // マーク用
     String markString;
     if ( this.mark == Trump.KEY_OF_CLUB ) {
-      markString = "CLUB";
+      markString = "□ CLUB";
     } else if ( this.mark == Trump.KEY_OF_DIA ) {
-      markString = "DIA";
+      markString = "★ DIA";
     } else if ( this.mark == Trump.KEY_OF_HEART ) {
-      markString = "HEART";
+      markString = "● HEART";
     } else if ( this.mark == Trump.KEY_OF_SPADE ) {
-      markString = "SPADE";
+      markString = "△ SPADE";
     }
     // 数字用
     int dNum = this.number + 1; // 0が1、1が2...を表すため

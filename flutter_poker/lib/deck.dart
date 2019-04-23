@@ -56,7 +56,7 @@ class Deck {
     int index;
 
     do {
-      index = rand.nextInt(this.deck.length);	// ランダムな数字を作成して
+      index = rand.nextInt(Poker.MAX_CARD);	// ランダムな数字を作成して
       print('created rand number is: ' + index.toString());
     } while ( deck[index] == null );	// そのカードがnullだった場合do{}内を繰り返す
 

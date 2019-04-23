@@ -42,6 +42,9 @@ class _PokerState extends State<Poker> {
     super.initState();
     shufflableTime = 1;  // シャッフル回数をリセット
     message = 'ゲームを開始します。' + '\n' +
+        'カードをタップしてSTAYorCHANGEを切り替えられます' +
+        'SHUFFLEボタンでCHANGEのカードを捨てて補填します' +
+        'SHUFFLEは最大2回まで可能です。' +
         shufflableTime.toString() + '/' + Poker.maxShufflableTime.toString() + ' 回目のシャッフルです。';
     unUsedDeck = new Deck();  // 未使用デッキを初期化
     fieldDeck = new Deck(); // フィールドデッキを初期化
@@ -280,5 +283,14 @@ class _PokerState extends State<Poker> {
 }
 
 
-
+class Rank {
+  final int rankOfOnePair = 1;	// 2
+  final int rankOfTwoPair = 3;	// 5
+  final int rankOfThreeCard = 5;	// 10
+  final int rankOfStraight = 7;	// 15
+  final int rankOfFlush = 8;	// 20
+  final int rankOfFullhouse = 10;	// 25
+  final int rankOfFourCard = 20;	// 50
+  final int rankOfStraightFlush = 30;	// 75
+}
 
