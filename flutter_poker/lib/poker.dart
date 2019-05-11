@@ -42,10 +42,25 @@ class _PokerState extends State<Poker> {
     super.initState();
     shufflableTime = 1;  // シャッフル回数をリセット
     message = 'ゲームを開始します。' + '\n' +
+<<<<<<< HEAD
         shufflableTime.toString() + '/' + Poker.MAX_SHUFFLABLE_TIME.toString() + ' 回目のシャッフルです。';
     deck = new Deck();  // 未使用デッキを初期化
     changeCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
     reloadCard();
+=======
+        'カードをタップしてSTAYorCHANGEを切り替えられます' +
+        'SHUFFLEボタンでCHANGEのカードを捨てて補填します' +
+        'SHUFFLEは最大2回まで可能です。' +
+        shufflableTime.toString() + '/' + Poker.maxShufflableTime.toString() + ' 回目のシャッフルです。';
+    unUsedDeck = new Deck();  // 未使用デッキを初期化
+    fieldDeck = new Deck(); // フィールドデッキを初期化
+    moveCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
+    card1 = fieldDeck.deck[0].cardToString();
+    card2 = fieldDeck.deck[1].cardToString();
+    card3 = fieldDeck.deck[2].cardToString();
+    card4 = fieldDeck.deck[3].cardToString();
+    card5 = fieldDeck.deck[4].cardToString();
+>>>>>>> cc0696514d85b3de3d616e4b68e9aa57b5ab97ac
   }
 
   // ウィジェット（画面の部品）の組み立て
@@ -313,5 +328,14 @@ class _PokerState extends State<Poker> {
 }
 
 
-
+class Rank {
+  final int rankOfOnePair = 1;	// 2
+  final int rankOfTwoPair = 3;	// 5
+  final int rankOfThreeCard = 5;	// 10
+  final int rankOfStraight = 7;	// 15
+  final int rankOfFlush = 8;	// 20
+  final int rankOfFullhouse = 10;	// 25
+  final int rankOfFourCard = 20;	// 50
+  final int rankOfStraightFlush = 30;	// 75
+}
 
