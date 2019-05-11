@@ -6,16 +6,15 @@ class Poker extends StatefulWidget {
   static final int MAX_NUMBER = 13;
   static final int MAX_CARD = MAX_MARK * MAX_NUMBER;
 
-  static final int maxFieldDeck = 5;  // フィールド上のデッキの最大数
-  static final int maxShufflableTime = 2;  // シャッフルできる最大値
+  static final int MAX_FIELD_CARD_LENGTH = 5;  // フィールド上のデッキの最大数
+  static final int MAX_SHUFFLABLE_TIME = 2;  // シャッフルできる最大値
 
   @override
   _PokerState createState() => _PokerState();
 }
 
 class _PokerState extends State<Poker> {
-  Deck unUsedDeck; // 未使用デッキ
-  Deck fieldDeck; // フィールド上のデッキ
+  Deck deck; // デッキ
   String message; // 下部に表示されるメッセージ用変数
   int shufflableTime; // 現在のシャッフル回数
   int coin = 100; // 所持コイン。テストで固定
@@ -25,6 +24,7 @@ class _PokerState extends State<Poker> {
   String card3; // カード用のテキストビュー
   String card4; // カード用のテキストビュー
   String card5; // カード用のテキストビュー
+  Widget cardInfo1; // テステス
 
   // アプリ全体通して使用するテキストスタイルを予め設定し各ウィジェットで使い回す
   var defaultTextStyle = TextStyle(
@@ -42,15 +42,10 @@ class _PokerState extends State<Poker> {
     super.initState();
     shufflableTime = 1;  // シャッフル回数をリセット
     message = 'ゲームを開始します。' + '\n' +
-        shufflableTime.toString() + '/' + Poker.maxShufflableTime.toString() + ' 回目のシャッフルです。';
-    unUsedDeck = new Deck();  // 未使用デッキを初期化
-    fieldDeck = new Deck(); // フィールドデッキを初期化
-    moveCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
-    card1 = fieldDeck.deck[0].cardToString();
-    card2 = fieldDeck.deck[1].cardToString();
-    card3 = fieldDeck.deck[2].cardToString();
-    card4 = fieldDeck.deck[3].cardToString();
-    card5 = fieldDeck.deck[4].cardToString();
+        shufflableTime.toString() + '/' + Poker.MAX_SHUFFLABLE_TIME.toString() + ' 回目のシャッフルです。';
+    deck = new Deck();  // 未使用デッキを初期化
+    changeCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
+    reloadCard();
   }
 
   // ウィジェット（画面の部品）の組み立て
@@ -106,7 +101,7 @@ class _PokerState extends State<Poker> {
               // 1枚目のカード
               RaisedButton(
                 key:null,
-                onPressed:cardPressed,
+                onPressed:card01Pressed,
                 color: Colors.black12,
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -120,7 +115,7 @@ class _PokerState extends State<Poker> {
               // 2枚目のカード
               RaisedButton(
                 key:null,
-                onPressed:cardPressed,
+                onPressed:card02Pressed,
                 color: Colors.black12,
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -146,7 +141,7 @@ class _PokerState extends State<Poker> {
               // 3枚目のカード
               RaisedButton(
                 key:null,
-                onPressed:cardPressed,
+                onPressed:card03Pressed,
                 color: Colors.black12,
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -160,7 +155,7 @@ class _PokerState extends State<Poker> {
               // 4枚目のカード
               RaisedButton(
                 key:null,
-                onPressed:cardPressed,
+                onPressed:card04Pressed,
                 color: Colors.black12,
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -174,7 +169,7 @@ class _PokerState extends State<Poker> {
               // 5枚目のカード
               RaisedButton(
                 key:null,
-                onPressed:cardPressed,
+                onPressed:card05Pressed,
                 color: Colors.black12,
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -220,55 +215,79 @@ class _PokerState extends State<Poker> {
   }
 
   // カードがタップされたときの処理
-  void cardPressed() {
-    print('----- カードがタップされました。-----');
-    fieldDeck.deck[0].changeShuffleStatus();
+  void card01Pressed() {
+    deck.changeShuffleStatusOfFieldCard(0);
     setState(() {
-      card1 = fieldDeck.deck[0].cardToString();
+      card1 = deck.pickFieldCard(0).cardToString();;
+    });
+  }
+  void card02Pressed() {
+    deck.changeShuffleStatusOfFieldCard(1);
+    setState(() {
+      card2 = deck.pickFieldCard(1).cardToString();;
+    });
+  }
+  void card03Pressed() {
+    deck.changeShuffleStatusOfFieldCard(2);
+    setState(() {
+      card3 = deck.pickFieldCard(2).cardToString();;
+    });
+  }
+  void card04Pressed() {
+    deck.changeShuffleStatusOfFieldCard(3);
+    setState(() {
+      card4 = deck.pickFieldCard(3).cardToString();;
+    });
+  }
+  void card05Pressed() {
+    deck.changeShuffleStatusOfFieldCard(4);
+    setState(() {
+      card5 = deck.pickFieldCard(4).cardToString();;
     });
   }
 
-  // カードのテキストを更新
+  // すべてのカードのテキストを更新
   void reloadCard() {
     setState(() {
-      card1 = fieldDeck.deck[0].cardToString();
-      card2 = fieldDeck.deck[1].cardToString();
-      card3 = fieldDeck.deck[2].cardToString();
-      card4 = fieldDeck.deck[3].cardToString();
-      card5 = fieldDeck.deck[4].cardToString();
+      card1 = deck.pickFieldCard(0).cardToString();
+      card2 = deck.pickFieldCard(1).cardToString();
+      card3 = deck.pickFieldCard(2).cardToString();
+      card4 = deck.pickFieldCard(3).cardToString();
+      card5 = deck.pickFieldCard(4).cardToString();
+      cardInfo1 = cardInfo(0);
     });
   }
 
   // シャッフルボタンをタップした時の処理
   void fixButtonPressed() {
-    if ( shufflableTime == Poker.maxShufflableTime ) {
+    if ( shufflableTime == Poker.MAX_SHUFFLABLE_TIME ) {
       gameSet();
     } else {
-      eraseShuffleCard(); // シャッフル
-      moveCardFromUnUsedToField();  // 足りないカードを補填
+      shuffle(); // シャッフル
+      changeCardFromUnUsedToField();  // 足りないカードを補填
       reloadCard();  // カードのテキストを更新
       shufflableTime++;
       setState(() {
         message = 'シャッフルしました。' + '\n' +
-            shufflableTime.toString() + '/' + Poker.maxShufflableTime.toString() + ' 回目のシャッフルです。';
+            shufflableTime.toString() + '/' + Poker.MAX_SHUFFLABLE_TIME.toString() + ' 回目のシャッフルです。';
       });
     }
   }
 
   // フィールドデッキに足りない枚数のカードを未使用デッキから引く
-  void moveCardFromUnUsedToField() {
-    setState(() {
-      while ( fieldDeck.getDeckLength() < Poker.maxFieldDeck ) {
-        fieldDeck.insertCard(unUsedDeck.takeCardFromDeckAndErase());
-      }
-    });
+  void changeCardFromUnUsedToField() {
+    while ( deck.countFiledCard() < Poker.MAX_FIELD_CARD_LENGTH ) {
+      print('引く前のカードの枚数は:' + deck.countFiledCard().toString() );
+      deck.takeCardFromUnusedCard();
+      print('引いた後のカードの枚数は:' + deck.countFiledCard().toString() );
+    }
   }
 
-  // フィールドデッキ内のシャッフル値がtrueのカードを消す
-  void eraseShuffleCard() {
-    for ( int i = 0; i < fieldDeck.getDeckLength(); i++ ) {
-      if ( fieldDeck.deck[i].shuffle ) {
-        unUsedDeck.setNull(i);
+  // フィールドデッキ内のシャッフル値がtrueのカードをすべてフィールド=falseにする
+  void shuffle() {
+    for ( int i = 0; i < deck.getDeckLength(); i++ ) {
+      if ( deck.cards[i].field && deck.cards[i].shuffle ) {
+        deck.cards[i].changeFieldStatus();
       }
     }
   }
@@ -276,6 +295,20 @@ class _PokerState extends State<Poker> {
   // ゲーム終了
   void gameSet() {
     print('----- ゲームが終了しました。-----');
+  }
+
+  // カード情報をColumn状態で返す（シャッフル値<Icon>, マーク<Icon>, 数字<String>）
+  Widget cardInfo(int index) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          new Icon(deck.returnIconOfShuffle(index)),
+          new Icon(deck.returnIconOfMark(index)),
+          new Text(deck.returnStringOfNumber(index), style: largeTextStyle),
+        ]
+    );
   }
 }
 

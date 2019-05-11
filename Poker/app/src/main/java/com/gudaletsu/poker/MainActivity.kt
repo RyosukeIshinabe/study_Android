@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 

@@ -8,16 +8,20 @@ class Trump {
 
   int mark;
   int number;
-  bool shuffle;
+  bool shuffle;  // 次のシャッフルで交換するかどうか
+  bool field;   // フィールド上に表示されていかどうか
+  bool used;    // 使用済みかどうか
 
   // コンストラクタ
-  Trump(int mark, int number, bool shuffle) {
+  Trump(int mark, int number) {
     this.mark = mark;
     this.number = number;
-    this.shuffle = shuffle;
+    this.shuffle = false;
+    this.field = false;
+    this.used = false;
   }
 
-  // カードを表現する文字列を返す
+  // カードを表現する文字列を返す（すべて文字列で返す用）
   String cardToString() {
     // シャッフル値用
     String shuffleStatus;
@@ -42,8 +46,44 @@ class Trump {
     return shuffleStatus + "\n" + markString + "\n" + dNum.toString();
   }
 
+  // カードを表現する文字列を返す（シャッフル値のみをアイコンで返す）
+  IconData returnIconOfShuffle() {
+    IconData shuffleIcon;
+    if ( this.shuffle ) {
+      shuffleIcon = Icons.autorenew;
+    } else {
+      shuffleIcon = Icons.file_download;
+    }
+    return shuffleIcon;
+  }
+
+  // カードを表現する文字列を返す（トランプのマークのみをマークで返す）
+  IconData returnIconOfMark() {
+    IconData markIcon;
+    if ( this.mark == Trump.KEY_OF_CLUB ) {
+      markIcon = Icons.wb_cloudy;
+    } else if ( this.mark == Trump.KEY_OF_DIA ) {
+      markIcon = Icons.wb_sunny;
+    } else if ( this.mark == Trump.KEY_OF_HEART ) {
+      markIcon = Icons.favorite;
+    } else if ( this.mark == Trump.KEY_OF_SPADE ) {
+      markIcon = Icons.star;
+    }
+    return markIcon;
+  }
+
   // シャッフル値を反転する
   void changeShuffleStatus() {
     this.shuffle = !this.shuffle;
+  }
+
+  // フィールド値を反転する
+  void changeFieldStatus() {
+    this.field = !this.field;
+  }
+
+  // 未使用/使用済みを反転する
+  void changeUsedStatus() {
+    this.used = !this.used;
   }
 }
