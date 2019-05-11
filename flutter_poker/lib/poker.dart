@@ -42,26 +42,16 @@ class _PokerState extends State<Poker> {
     super.initState();
     shufflableTime = 1;  // シャッフル回数をリセット
     message = 'ゲームを開始します。' + '\n' +
-<<<<<<< HEAD
-        shufflableTime.toString() + '/' + Poker.MAX_SHUFFLABLE_TIME.toString() + ' 回目のシャッフルです。';
+    shufflableTime.toString() + '/' + Poker.MAX_SHUFFLABLE_TIME.toString() + ' 回目のシャッフルです。';
     deck = new Deck();  // 未使用デッキを初期化
     changeCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
     reloadCard();
-=======
-        'カードをタップしてSTAYorCHANGEを切り替えられます' +
-        'SHUFFLEボタンでCHANGEのカードを捨てて補填します' +
-        'SHUFFLEは最大2回まで可能です。' +
-        shufflableTime.toString() + '/' + Poker.maxShufflableTime.toString() + ' 回目のシャッフルです。';
-    unUsedDeck = new Deck();  // 未使用デッキを初期化
-    fieldDeck = new Deck(); // フィールドデッキを初期化
-    moveCardFromUnUsedToField();  // 未使用デッキからフィールドにカードを補填
-    card1 = fieldDeck.deck[0].cardToString();
-    card2 = fieldDeck.deck[1].cardToString();
-    card3 = fieldDeck.deck[2].cardToString();
-    card4 = fieldDeck.deck[3].cardToString();
-    card5 = fieldDeck.deck[4].cardToString();
->>>>>>> cc0696514d85b3de3d616e4b68e9aa57b5ab97ac
-  }
+
+    card1 = deck.cards[0].cardToString();
+    card2 = deck.cards[1].cardToString();
+    card3 = deck.cards[2].cardToString();
+    card4 = deck.cards[3].cardToString();
+    card5 = deck.cards[4].cardToString();
 
   // ウィジェット（画面の部品）の組み立て
   @override
@@ -326,6 +316,12 @@ class _PokerState extends State<Poker> {
     );
   }
 }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
 
 
 class Rank {
