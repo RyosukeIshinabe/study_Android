@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">LightGame</string>
+    <string name="light">light</string>
+    <string name="lightswitch">lightswitch</string>
+    <string name="line">line</string>
+    <string name="stage">stage:</string>
+    <string name="stageNo">000</string>
+    <string name="count">count:</string>
+    <string name="counter">000</string>
+    <string name="BACK">back</string>
+    <string name="CLEAR">CLEAR!</string>
+    <string name="stage001">001</string>
+    <string name="loading">loading...</string>
+    <string name="stage002">002</string>
+    <string name="stage003">003</string>
+</resources>
