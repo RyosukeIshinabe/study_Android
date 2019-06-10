@@ -1,5 +1,6 @@
 package com.gudaletsu.lightgame
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    private val maxStageNo = 3
     private val saveData = IntArray(4)  // あとで使う。セーブデータを配列で管理する用
 
     // アプリ起動時に1回だけ読み込まれる処理
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // ゲームスタートボタンを押した時のリスナーを用意
-        btn_gameStart_001.setOnClickListener {
+        btn_gameStart_1.setOnClickListener {
             // インテントを用意
             val intent = Intent(this, GameActivity::class.java)
             // GameActivityを開く
@@ -34,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         super.onResume()    // これはおまじない（定型文）
         loadData()
         displayData()
+    }
+
+    // ステージ用アクティビティが増えてきた時を想定して一括のクリックリスナー作れるといいのにな
+    fun setOnAllClickListenerOfGameStart() {
+        val i = 1   // ここはあとでforぶんを使う
+        // 「btn_gameStart_i」のリソースを探してIDを取得
+        val viewId = resources.getIdentifier("btn_gameStart_" + i.toString(), "id", packageName)
+        // 探したIDからActivityを見つけ出す
+        // どうやって・・？
     }
 
     // 共有プリファレンスに入っていたセーブデータを取得してsaveDate変数に格納
